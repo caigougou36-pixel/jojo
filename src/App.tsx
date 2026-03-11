@@ -228,16 +228,15 @@ function CarbonServices() {
     offset: ["start end", "end start"]
   });
   const y = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
-  
-  const [activeService, setActiveService] = useState<number | null>(null);
+  const [activeService, setActiveService] = useState<number>(0);
 
   const services = [
-    { num: "01", title: "碳管理与咨询服务", desc: "现状诊断、核算与合规、体系搭建", details: "为企业提供全面的碳排放现状诊断，精准核算碳足迹，确保符合国内外合规要求，并协助搭建完善的内部碳管理体系。" },
-    { num: "02", title: "碳交易与碳资产管理", desc: "资产盘点、全品类交易、资产托管", details: "全面盘点企业碳资产，提供全品类碳交易撮合服务，并通过专业的资产托管实现碳资产的保值增值。" },
-    { num: "03", title: "降碳技术研发与创新", desc: "技术适配、CCER方法学开发", details: "针对不同行业特点进行降碳技术适配，并主导或参与CCER（国家核证自愿减排量）方法学的开发与创新。" },
-    { num: "04", title: "绿色金融与碳融资", desc: "碳资产融资、绿色信贷、投融资对接", details: "依托碳资产为企业打通融资渠道，对接绿色信贷资源，提供从评估到落地的全流程投融资对接服务。" },
-    { num: "05", title: "低碳能力建设服务", desc: "定制化培训、组织赋能、内部考核", details: "为企业量身定制低碳知识培训体系，赋能组织内部人员，并将碳表现纳入企业内部考核机制。" },
-    { num: "06", title: "企业碳管理数字化平台", desc: "数据采集、碳核算分析、合规预警", details: "搭建一站式数字化管理平台，实现碳排放数据的自动化采集、实时核算分析及智能合规预警。" },
+    { num: "01", title: "碳管理与咨询服务", desc: "现状诊断、核算与合规、体系搭建", details: "为企业提供全面的碳排放现状诊断，精准核算碳足迹，确保符合国内外合规要求，并协助搭建完善的内部碳管理体系。", img: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1000&auto=format&fit=crop" },
+    { num: "02", title: "碳交易与碳资产管理", desc: "资产盘点、全品类交易、资产托管", details: "全面盘点企业碳资产，提供全品类碳交易撮合服务，并通过专业的资产托管实现碳资产的保值增值。", img: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=1000&auto=format&fit=crop" },
+    { num: "03", title: "降碳技术研发与创新", desc: "技术适配、CCER方法学开发", details: "针对不同行业特点进行降碳技术适配，并主导或参与CCER（国家核证自愿减排量）方法学的开发与创新。", img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1000&auto=format&fit=crop" },
+    { num: "04", title: "绿色金融与碳融资", desc: "碳资产融资、绿色信贷、投融资对接", details: "依托碳资产为企业打通融资渠道，对接绿色信贷资源，提供从评估到落地的全流程投融资对接服务。", img: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1000&auto=format&fit=crop" },
+    { num: "05", title: "低碳能力建设服务", desc: "定制化培训、组织赋能、内部考核", details: "为企业量身定制低碳知识培训体系，赋能组织内部人员，并将碳表现纳入企业内部考核机制。", img: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=1000&auto=format&fit=crop" },
+    { num: "06", title: "企业碳管理数字化平台", desc: "数据采集、碳核算分析、合规预警", details: "搭建一站式数字化管理平台，实现碳排放数据的自动化采集、实时核算分析及智能合规预警。", img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop" },
   ];
 
   return (
@@ -258,90 +257,79 @@ function CarbonServices() {
           variants={fadeIn}
           initial="initial"
           whileInView="whileInView"
-          className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6"
+          className="mb-16"
         >
-          <div>
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-rock-gray mb-2">
-              碳业务全链条服务
-            </h2>
-            <p className="text-teal-800 font-mono uppercase tracking-widest text-sm font-semibold">Carbon Services</p>
-          </div>
-          <p className="text-rock-gray/70 max-w-md text-lg leading-relaxed">
-            系统性B端服务能力，以数字化与专业咨询驱动企业低碳转型。
-          </p>
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-rock-gray mb-2">
+            碳业务全链条服务
+          </h2>
+          <p className="text-teal-800 font-mono uppercase tracking-widest text-sm font-semibold">Carbon Services</p>
         </motion.div>
 
         <motion.div 
           variants={staggerContainer}
           initial="initial"
           whileInView="whileInView"
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="flex flex-col lg:flex-row gap-6 lg:gap-10 h-[80vh] lg:h-[70vh] w-full"
         >
-          {services.map((service, index) => (
-            <motion.div 
-              key={index}
-              variants={fadeIn}
-              className="bg-white/30 backdrop-blur-md border border-white/40 p-8 rounded-[2rem] transition-all duration-500 group hover:bg-white/60 hover:shadow-xl hover:shadow-teal-900/5 hover:-translate-y-2 hover:scale-[1.02] relative overflow-hidden flex flex-col justify-between"
-            >
-              <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-transparent via-teal-600 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              
-              <div className="text-5xl font-mono font-bold text-teal-800/10 group-hover:text-teal-800/20 transition-colors duration-500">
-                {service.num}
-              </div>
-              
-              <div className="relative">
-                <h3 className="text-2xl font-bold mb-4 text-rock-gray group-hover:text-teal-800 transition-colors duration-300">{service.title}</h3>
-                <p className="text-base text-rock-gray/70 leading-relaxed font-mono bg-white/30 p-4 rounded-xl border border-white/40 mb-4">{service.desc}</p>
-                <div className="h-10 overflow-hidden">
-                  <button 
-                    onClick={() => setActiveService(index)}
-                    className="inline-flex items-center gap-2 bg-teal-800/10 text-teal-800 px-5 py-2 rounded-full text-sm font-bold hover:bg-teal-800 hover:text-white opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300"
-                  >
-                    查看详情 <ArrowUpRight className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+          {/* Left: Image Display */}
+          <div className="w-full lg:w-1/2 h-1/2 lg:h-full rounded-[2.5rem] overflow-hidden relative shadow-2xl border-4 border-white/50 group bg-rock-gray/10">
+            <AnimatePresence>
+              <motion.img
+                key={activeService}
+                src={services[activeService].img}
+                alt={services[activeService].title}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.8, ease: "easeInOut" }}
+                className="w-full h-full object-cover absolute inset-0"
+              />
+            </AnimatePresence>
+            <div className="absolute inset-0 bg-gradient-to-t from-rock-gray/60 via-transparent to-transparent opacity-60 pointer-events-none z-10"></div>
+          </div>
+
+          {/* Right: Vertical Strips Accordion */}
+          <div className="w-full lg:w-1/2 h-1/2 lg:h-full flex flex-row gap-2 md:gap-3">
+            {services.map((service, index) => {
+              const isActive = activeService === index;
+              return (
+                <motion.div 
+                  layout
+                  key={index}
+                  onMouseEnter={() => setActiveService(index)}
+                  className={`relative h-full rounded-2xl md:rounded-[2rem] cursor-pointer overflow-hidden border backdrop-blur-md transition-colors duration-500
+                    ${isActive ? 'flex-1 bg-white/60 border-white/80 shadow-lg' : 'w-12 md:w-16 flex-shrink-0 bg-white/20 border-white/30 hover:bg-white/40'}
+                  `}
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                >
+                  {/* Inactive State Content (Vertical Text) */}
+                  <div className={`absolute inset-0 flex flex-col items-center py-5 md:py-8 transition-opacity duration-300 ${isActive ? 'opacity-0 pointer-events-none' : 'opacity-100 delay-200'}`}>
+                    <span className="text-lg md:text-2xl font-mono font-bold text-teal-800/40 mb-4">{service.num}</span>
+                    <span className="text-rock-gray font-bold tracking-widest whitespace-nowrap" style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}>
+                      {service.title}
+                    </span>
+                  </div>
+                  
+                  {/* Active State Content */}
+                  <div className={`absolute inset-0 flex flex-col justify-start pt-8 md:pt-12 px-5 md:px-8 transition-all duration-500 ${isActive ? 'opacity-100 translate-y-0 delay-100' : 'opacity-0 -translate-y-12 pointer-events-none'}`}>
+                    <div className="text-3xl md:text-5xl font-mono font-bold text-teal-800/20 mb-2 md:mb-4 flex-shrink-0">
+                      {service.num}
+                    </div>
+                    <h3 className="text-xl md:text-3xl font-bold text-teal-900 leading-tight mb-3 md:mb-4 flex-shrink-0 whitespace-normal break-words">
+                      {service.title}
+                    </h3>
+                    <div className="w-8 md:w-10 h-1 bg-sage-green/50 mb-4 md:mb-5 rounded-full flex-shrink-0"></div>
+                    <div className="overflow-y-auto no-scrollbar pr-2 pb-4 flex-grow">
+                      <p className="text-teal-800 font-bold mb-2 text-sm md:text-base">{service.desc}</p>
+                      <p className="text-rock-gray/80 leading-relaxed text-xs md:text-sm">{service.details}</p>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
         </motion.div>
       </div>
-
-      {/* Hover/Click Modal Popup */}
-      <AnimatePresence>
-        {activeService !== null && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="absolute inset-0 z-50 flex items-center justify-center bg-rock-gray/20 backdrop-blur-sm p-6"
-          >
-            <motion.div 
-              initial={{ scale: 0.9, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.9, y: 20 }}
-              className="bg-white/90 backdrop-blur-2xl p-10 rounded-[2.5rem] max-w-lg w-full shadow-2xl border border-white relative"
-            >
-              <button 
-                onClick={() => setActiveService(null)}
-                className="absolute top-6 right-6 w-10 h-10 rounded-full bg-oat-white flex items-center justify-center text-rock-gray hover:bg-sage-green hover:text-white transition-colors"
-              >
-                <X className="w-5 h-5" />
-              </button>
-              
-              <div className="text-6xl font-mono font-bold text-teal-800/10 mb-4">
-                {services[activeService].num}
-              </div>
-              <h3 className="text-3xl font-bold mb-6 text-teal-900">
-                {services[activeService].title}
-              </h3>
-              <div className="h-px w-full bg-gradient-to-r from-sage-green/30 to-transparent mb-6"></div>
-              <p className="text-lg text-rock-gray/80 leading-relaxed">
-                {services[activeService].details}
-              </p>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </section>
   );
 }
@@ -353,12 +341,13 @@ function GreenProducts() {
     offset: ["start end", "end start"]
   });
   const y = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+  const [activeProduct, setActiveProduct] = useState<number | null>(null);
 
   const products = [
-    { title: "文创办公组合", img: "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?q=80&w=800&auto=format&fit=crop" },
-    { title: "绿色疗愈小物", img: "https://images.unsplash.com/photo-1608501821300-4f99e58bba77?q=80&w=800&auto=format&fit=crop" },
-    { title: "户外绿游装备", img: "https://images.unsplash.com/photo-1504280390227-351a2d052e5b?q=80&w=800&auto=format&fit=crop" },
-    { title: "永续开运/节庆", img: "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?q=80&w=800&auto=format&fit=crop" },
+    { title: "文创办公组合", img: "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?q=80&w=800&auto=format&fit=crop", details: "采用环保再生材料制作的办公用品组合，兼具实用性与美学设计，让日常办公也能践行低碳理念。" },
+    { title: "绿色疗愈小物", img: "https://images.unsplash.com/photo-1608501821300-4f99e58bba77?q=80&w=800&auto=format&fit=crop", details: "以自然植物和环保材质打造的桌面疗愈好物，为繁忙的都市生活带来一抹生机与宁静。" },
+    { title: "户外绿游装备", img: "https://images.unsplash.com/photo-1504280390227-351a2d052e5b?q=80&w=800&auto=format&fit=crop", details: "专为户外爱好者设计的低碳出行装备，采用可降解或循环利用材质，减少对自然环境的负担。" },
+    { title: "永续开运/节庆", img: "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?q=80&w=800&auto=format&fit=crop", details: "结合传统文化与现代环保理念的节庆礼品，传递美好祝福的同时，倡导可持续的生活方式。" },
   ];
 
   const tags = ['再生资源', '资源循环', '材质优先', '智能避碳', '碳足迹标签', '环保美学'];
@@ -408,6 +397,7 @@ function GreenProducts() {
                 key={index}
                 variants={fadeIn}
                 whileHover={{ scale: 1.05, rotateY: index % 2 === 0 ? 5 : -5, rotateX: index < 2 ? 5 : -5, zIndex: 10 }}
+                onClick={() => setActiveProduct(index)}
                 className="group cursor-pointer rounded-[2rem] overflow-hidden relative shadow-2xl border-2 border-white/50 h-[30vh] lg:h-[40vh] transition-all duration-500"
                 style={{ transformStyle: "preserve-3d" }}
               >
@@ -439,6 +429,47 @@ function GreenProducts() {
           ))}
         </div>
       </div>
+
+      {/* Hover/Click Modal Popup */}
+      <AnimatePresence>
+        {activeProduct !== null && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-rock-gray/40 backdrop-blur-sm p-6"
+            onClick={() => setActiveProduct(null)}
+          >
+            <motion.div 
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white/90 backdrop-blur-2xl p-10 rounded-[2.5rem] max-w-lg w-full shadow-2xl border border-white relative overflow-hidden"
+            >
+              <button 
+                onClick={() => setActiveProduct(null)}
+                className="absolute top-6 right-6 w-10 h-10 rounded-full bg-oat-white flex items-center justify-center text-rock-gray hover:bg-sage-green hover:text-white transition-colors z-10"
+              >
+                <X className="w-5 h-5" />
+              </button>
+              
+              <div className="h-48 -mx-10 -mt-10 mb-8 relative">
+                <img src={products[activeProduct].img} alt={products[activeProduct].title} className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent"></div>
+              </div>
+
+              <h3 className="text-3xl font-bold mb-4 text-teal-900">
+                {products[activeProduct].title}
+              </h3>
+              <div className="h-px w-full bg-gradient-to-r from-sage-green/30 to-transparent mb-6"></div>
+              <p className="text-lg text-rock-gray/80 leading-relaxed">
+                {products[activeProduct].details}
+              </p>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
@@ -523,8 +554,8 @@ function Solutions() {
                 <p className="text-white/70 font-mono text-sm">批量采购 · 定制合作 · 联合开发</p>
               </div>
               <div className="flex flex-col md:flex-row md:items-center justify-between pt-2">
-                <h4 className="font-bold text-morning-gold text-2xl mb-2 md:mb-0">组合打包合作</h4>
-                <p className="text-teal-900 font-bold bg-morning-gold px-4 py-1.5 rounded-full text-sm">碳业务 + 产品一站式</p>
+                <h4 className="font-bold text-sage-green text-2xl mb-2 md:mb-0">组合打包合作</h4>
+                <p className="text-white/70 font-mono text-sm">碳业务 + 产品一站式</p>
               </div>
             </div>
           </motion.div>
@@ -562,28 +593,25 @@ function Footer() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="w-full max-w-5xl bg-white/5 backdrop-blur-xl border border-white/10 rounded-[3rem] p-12 md:p-20 text-center shadow-2xl"
+          className="w-full max-w-4xl text-center py-12"
         >
-          <div className="w-20 h-20 mx-auto rounded-2xl bg-sage-green/20 flex items-center justify-center mb-8 border border-sage-green/30">
-            <Leaf className="w-10 h-10 text-sage-green" />
+          <div className="w-16 h-16 mx-auto rounded-2xl bg-sage-green/20 flex items-center justify-center mb-6 border border-sage-green/30">
+            <Leaf className="w-8 h-8 text-sage-green" />
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">
             开启低碳合作之旅
           </h2>
-          <p className="text-white/70 text-lg mb-12 max-w-2xl mx-auto leading-relaxed">
-            无论您是寻求专业的碳管理咨询，还是希望定制专属的绿色环保产品，循旸信息科技都将是您最可靠的绿色伙伴。让我们携手，共同创造环境与经济的双重价值。
+          <p className="text-white/70 text-base mb-8 max-w-xl mx-auto leading-relaxed">
+            无论您是寻求专业的碳管理咨询，还是希望定制专属的绿色环保产品，循旸信息科技都将是您最可靠的绿色伙伴。
           </p>
           
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-12">
-            <button className="w-full sm:w-auto bg-sage-green text-white px-10 py-4 rounded-full hover:bg-white hover:text-teal-900 transition-all duration-300 shadow-xl shadow-sage-green/20 flex items-center justify-center gap-3 text-lg font-bold group">
-              <Mail className="w-5 h-5" /> 立即联系我们
-            </button>
-            <button className="w-full sm:w-auto bg-transparent border border-white/30 text-white px-10 py-4 rounded-full hover:bg-white/10 transition-all duration-300 flex items-center justify-center gap-3 text-lg font-medium">
-              <Phone className="w-5 h-5" /> 预约咨询
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+            <button className="w-full sm:w-auto bg-sage-green text-white px-8 py-3 rounded-full hover:bg-white hover:text-teal-900 transition-all duration-300 shadow-xl shadow-sage-green/20 flex items-center justify-center gap-2 text-base font-bold group">
+              <Phone className="w-4 h-4" /> 联系我们
             </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left border-t border-white/10 pt-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left border-t border-white/10 pt-8">
             <div>
               <h4 className="text-white font-bold mb-4 flex items-center gap-2"><Hexagon className="w-4 h-4 text-sage-green"/> 核心业务</h4>
               <ul className="space-y-2 text-white/60 text-sm">
