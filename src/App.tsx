@@ -1,7 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 import { 
-  Leaf, Hexagon, ArrowUpRight, QrCode, X, Mail, Phone, MapPin, CheckCircle2
+  Leaf, Hexagon, ArrowUpRight, QrCode, X, Mail, Phone, MapPin, CheckCircle2,
+  Settings, Gift, PenTool, ShieldCheck, RefreshCw, Zap, Briefcase, Layers, Handshake, Award, ChevronDown
 } from 'lucide-react';
 
 const fadeIn = {
@@ -18,7 +19,7 @@ const staggerContainer = {
   transition: { staggerChildren: 0.15 }
 };
 
-function Navbar() {
+function Navbar({ onContactClick }: { onContactClick: () => void }) {
   return (
     <motion.header 
       initial={{ y: -100 }}
@@ -38,7 +39,7 @@ function Navbar() {
         </div>
         
         <nav className="hidden md:flex items-center gap-8">
-          {['首页', '关于我们', '碳服务', '理迹生活', '解决方案'].map(item => (
+          {['首页', '关于我们', '碳服务', '理迹生活', '合作定制'].map(item => (
             <a key={item} href={`#${item}`} className="text-sm font-medium text-rock-gray/70 hover:text-sage-green transition-colors relative group">
               {item}
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sage-green transition-all duration-300 group-hover:w-full"></span>
@@ -46,7 +47,10 @@ function Navbar() {
           ))}
         </nav>
         
-        <button className="hidden md:flex items-center gap-2 bg-teal-900 text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-sage-green transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5">
+        <button 
+          onClick={onContactClick}
+          className="hidden md:flex items-center gap-2 bg-teal-900 text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-sage-green transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5"
+        >
           开启低碳合作之旅
         </button>
       </div>
@@ -82,6 +86,7 @@ function Hero() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, ease: "easeOut" }}
+          onClick={() => document.getElementById('理迹生活')?.scrollIntoView({ behavior: 'smooth' })}
           className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-sage-green/30 bg-white/60 backdrop-blur-md mb-8 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
         >
           <span className="flex h-2 w-2 rounded-full bg-sage-green animate-pulse"></span>
@@ -116,7 +121,10 @@ function Hero() {
           className="max-w-2xl mx-auto relative mt-12"
         >
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button className="w-full sm:w-auto bg-sage-green text-white px-8 py-4 rounded-full hover:bg-teal-800 transition-all duration-300 shadow-lg shadow-sage-green/30 flex items-center justify-center gap-2 font-medium group">
+            <button 
+              onClick={() => document.getElementById('关于我们')?.scrollIntoView({ behavior: 'smooth' })}
+              className="w-full sm:w-auto bg-sage-green text-white px-8 py-4 rounded-full hover:bg-teal-800 transition-all duration-300 shadow-lg shadow-sage-green/30 flex items-center justify-center gap-2 font-medium group"
+            >
               绿色服务创新企业
             </button>
           </div>
@@ -566,7 +574,7 @@ function GreenProducts() {
     },
   ];
 
-  const tags = ['理迹生活', '简约生活', '友善环境', '化繁为简', '文创办公', '绿色疗愈', '户外绿游', '永续开运', '碳足迹标', '废弃再生', '生物降解', '单一材质', '再生材料', '循环复用', '智能低碳', '和谐共好'];
+  const tags = ['简约生活', '友善环境', '化繁为简', '和谐共好', '文创办公', '绿色疗愈', '户外绿游', '永续开运', '循环复用', '再生材质', '全生命周期', '资源高值化', '绿色材质', '单一材质', '模块化设计', '可回收包装', '智能低碳'];
 
   return (
     <section ref={ref} id="理迹生活" className="min-h-[100dvh] w-full relative flex flex-col justify-center overflow-hidden py-24">
@@ -731,8 +739,29 @@ function Solutions() {
   });
   const y = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
 
+  const modules = [
+    {
+      title: "企业专属定制",
+      icon: <Award className="w-8 h-8" />,
+      services: ["品牌定制", "功能定制", "场景定制"],
+      desc: "为您打造独一无二的专属低碳产品。我们支持在产品外观及包装印制企业LOGO与宣传标语；可根据实际业务需求灵活调整特定功能；并为员工福利、商务馈赠等不同应用场景量身设计专属套装。"
+    },
+    {
+      title: "全效服务保障",
+      icon: <ShieldCheck className="w-8 h-8" />,
+      services: ["品质保障", "售后支持", "快速响应"],
+      desc: "全方位保障您的合作体验。我们承诺所有产品均提供权威的环保与质量检测报告；如遇质量问题免费更换并提供回收渠道；依托高效供应链，实现定制订单快速打样与极速交货。"
+    },
+    {
+      title: "灵活合作方案",
+      icon: <Handshake className="w-8 h-8" />,
+      services: ["碳业务合作", "低碳产品合作", "组合合作方案"],
+      desc: "精准适配您的不同发展需求。提供针对单一碳需求的项目制或模块化服务；提供享专属折扣的低碳产品批量采购与定制；主推“碳业务年度服务+员工低碳产品福利”一站式深度打包组合，实现长效共赢。"
+    }
+  ];
+
   return (
-    <section ref={ref} id="解决方案" className="min-h-[100dvh] w-full relative flex flex-col justify-center overflow-hidden py-24">
+    <section ref={ref} id="合作定制" className="min-h-[100dvh] w-full relative flex flex-col justify-center overflow-hidden py-24">
       {/* Eco Background Image with Seamless Gradient Overlay */}
       <motion.div style={{ y }} className="absolute inset-0 z-0 h-[120%] -top-[10%]">
         <img 
@@ -745,7 +774,9 @@ function Solutions() {
         <div className="absolute inset-0 bg-gradient-to-b from-oat-white via-oat-white/80 to-teal-950/90"></div>
       </motion.div>
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-6 relative z-10 flex flex-col justify-center h-full">
+        
+        {/* Header Section - Reverted to original left-aligned */}
         <motion.div 
           variants={fadeIn}
           initial="initial"
@@ -754,67 +785,65 @@ function Solutions() {
         >
           <div>
             <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-rock-gray mb-2">
-              解决方案与合作模式
+              合作与定制
             </h2>
             <p className="text-sage-green font-mono uppercase tracking-widest text-sm font-semibold">Solutions & Cooperation</p>
           </div>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
-          <motion.div 
-            variants={fadeIn}
-            initial="initial"
-            whileInView="whileInView"
-            className="bg-white/60 backdrop-blur-xl p-12 rounded-[2.5rem] border border-white shadow-xl shadow-sage-green/10 hover:-translate-y-2 transition-transform duration-500 relative overflow-hidden flex flex-col justify-center group"
-          >
-            <div className="absolute -right-4 -top-10 text-[200px] font-bold text-sage-green/10 font-mono leading-none">01</div>
-            <h3 className="text-4xl font-bold mb-10 text-teal-900 relative z-10">
-              企业定制服务
-            </h3>
-            <div className="flex flex-col gap-4 relative z-10">
-              {['品牌定制', '功能定制', '场景定制'].map((item, i) => (
-                <div key={i} className="px-6 py-4 rounded-2xl border border-white/60 bg-white/40 backdrop-blur-md text-teal-900 text-xl font-bold shadow-sm flex items-center gap-4 hover:bg-white/80 transition-colors">
-                  <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm">
-                    <CheckCircle2 className="w-5 h-5 text-sage-green" />
-                  </div>
-                  {item}
+        {/* 3-Column Minimalist Accordion Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {modules.map((mod, i) => (
+            <motion.div 
+              key={i}
+              variants={fadeIn}
+              initial="initial"
+              whileInView="whileInView"
+              className="group relative bg-white/30 hover:bg-white/50 backdrop-blur-2xl p-8 md:p-10 rounded-3xl border border-white/40 shadow-[0_8px_32px_0_rgba(0,0,0,0.05)] transition-all duration-500 flex flex-col h-fit cursor-pointer"
+            >
+              {/* Top Row: Icon, Title, and Dropdown Hint */}
+              <div className="flex items-center justify-between mb-8">
+                <div className="w-16 h-16 rounded-2xl bg-teal-950 text-white flex items-center justify-center shadow-md group-hover:scale-110 group-hover:bg-sage-green transition-all duration-500 flex-shrink-0">
+                  {mod.icon}
                 </div>
-              ))}
-            </div>
-          </motion.div>
+                <div className="w-10 h-10 rounded-full bg-white/50 flex items-center justify-center text-teal-900 shadow-sm border border-white/60 group-hover:rotate-180 transition-transform duration-500">
+                  <ChevronDown className="w-5 h-5" />
+                </div>
+              </div>
+              
+              <h3 className="text-2xl font-bold text-teal-950 mb-6">
+                {mod.title}
+              </h3>
+              
+              {/* Services Tags */}
+              <div className="flex flex-wrap gap-2">
+                {mod.services.map((service, idx) => (
+                  <span key={idx} className="px-4 py-2 bg-teal-900/5 border border-teal-900/10 rounded-full text-sm font-medium text-teal-800 group-hover:bg-teal-900/10 transition-colors duration-500">
+                    {service}
+                  </span>
+                ))}
+              </div>
 
-          <motion.div 
-            variants={fadeIn}
-            initial="initial"
-            whileInView="whileInView"
-            className="bg-teal-900/80 backdrop-blur-xl p-12 rounded-[2.5rem] border border-teal-800 shadow-xl hover:-translate-y-2 transition-transform duration-500 relative overflow-hidden flex flex-col justify-center"
-          >
-            <div className="absolute -right-4 -top-10 text-[200px] font-bold text-white/5 font-mono leading-none">02</div>
-            <h3 className="text-4xl font-bold mb-10 text-white relative z-10">
-              灵活合作方案
-            </h3>
-            <div className="space-y-6 relative z-10">
-              <div className="flex flex-col md:flex-row md:items-center justify-between border-b border-white/10 pb-6">
-                <h4 className="font-bold text-sage-green text-2xl mb-2 md:mb-0">碳业务合作</h4>
-                <p className="text-white/70 font-mono text-sm">项目制 · 长期战略 · 模块化</p>
+              {/* Expandable Description using CSS Grid */}
+              <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-in-out">
+                <div className="overflow-hidden">
+                  <div className="pt-6 mt-6 border-t border-teal-900/10">
+                    <p className="text-slate-600 text-sm leading-relaxed">
+                      {mod.desc}
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div className="flex flex-col md:flex-row md:items-center justify-between border-b border-white/10 pb-6">
-                <h4 className="font-bold text-sage-green text-2xl mb-2 md:mb-0">低碳产品合作</h4>
-                <p className="text-white/70 font-mono text-sm">批量采购 · 定制合作 · 联合开发</p>
-              </div>
-              <div className="flex flex-col md:flex-row md:items-center justify-between pt-2">
-                <h4 className="font-bold text-sage-green text-2xl mb-2 md:mb-0">组合打包合作</h4>
-                <p className="text-white/70 font-mono text-sm">碳业务 + 产品一站式</p>
-              </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          ))}
         </div>
+
       </div>
     </section>
   );
 }
 
-function Footer() {
+function Footer({ onContactClick }: { onContactClick: () => void }) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -855,7 +884,10 @@ function Footer() {
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-            <button className="w-full sm:w-auto bg-sage-green text-white px-8 py-3 rounded-full hover:bg-white hover:text-teal-900 transition-all duration-300 shadow-xl shadow-sage-green/20 flex items-center justify-center gap-2 text-base font-bold group">
+            <button 
+              onClick={onContactClick}
+              className="w-full sm:w-auto bg-sage-green text-white px-8 py-3 rounded-full hover:bg-white hover:text-teal-900 transition-all duration-300 shadow-xl shadow-sage-green/20 flex items-center justify-center gap-2 text-base font-bold group"
+            >
               <Phone className="w-4 h-4" /> 联系我们
             </button>
           </div>
@@ -905,16 +937,114 @@ function Footer() {
   );
 }
 
+function ContactModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="absolute inset-0 bg-teal-950/60 backdrop-blur-sm"
+          />
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            className="relative w-full max-w-2xl bg-oat-white rounded-3xl overflow-hidden shadow-2xl border border-white/50"
+          >
+            <button 
+              onClick={onClose}
+              className="absolute top-4 right-4 w-10 h-10 bg-white/50 hover:bg-white rounded-full flex items-center justify-center text-teal-950 transition-colors z-10"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            
+            <div className="flex flex-col md:flex-row">
+              {/* Left side: Image */}
+              <div className="w-full md:w-2/5 h-48 md:h-auto relative">
+                <img 
+                  src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1000&auto=format&fit=crop" 
+                  alt="Office Building" 
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-teal-950/80 to-transparent md:bg-gradient-to-r"></div>
+                <div className="absolute bottom-4 left-4 text-white">
+                  <Leaf className="w-8 h-8 mb-2 text-sage-green" />
+                  <h3 className="font-bold text-lg">绿色伙伴</h3>
+                </div>
+              </div>
+              
+              {/* Right side: Content */}
+              <div className="w-full md:w-3/5 p-8 md:p-10 bg-oat-white">
+                <h2 className="text-2xl font-bold text-teal-950 mb-6">联系我们</h2>
+                
+                <div className="space-y-6">
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-full bg-sage-green/10 flex items-center justify-center flex-shrink-0 text-sage-green">
+                      <Briefcase className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold text-teal-900 mb-1">公司名称</p>
+                      <p className="text-slate-600 text-sm">上海循旸信息科技有限公司</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-full bg-sage-green/10 flex items-center justify-center flex-shrink-0 text-sage-green">
+                      <Phone className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold text-teal-900 mb-1">公司电话</p>
+                      <p className="text-slate-600 text-sm">+86 123 4567 8900</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-full bg-sage-green/10 flex items-center justify-center flex-shrink-0 text-sage-green">
+                      <Mail className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold text-teal-900 mb-1">公司邮箱</p>
+                      <p className="text-slate-600 text-sm">contact@xunyang.com</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-full bg-sage-green/10 flex items-center justify-center flex-shrink-0 text-sage-green">
+                      <MapPin className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold text-teal-900 mb-1">公司地址</p>
+                      <p className="text-slate-600 text-sm leading-relaxed">上海市浦东新区<br/>世纪大道 100 号</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
+  );
+}
+
 export default function App() {
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+
   return (
     <div className="w-full overflow-x-hidden font-sans selection:bg-sage-green/30 selection:text-rock-gray bg-oat-white">
-      <Navbar />
+      <Navbar onContactClick={() => setIsContactModalOpen(true)} />
       <Hero />
       <About />
       <CarbonServices />
       <GreenProducts />
       <Solutions />
-      <Footer />
+      <Footer onContactClick={() => setIsContactModalOpen(true)} />
+      <ContactModal isOpen={isContactModalOpen} onClose={() => setIsContactModalOpen(false)} />
     </div>
   );
 }
